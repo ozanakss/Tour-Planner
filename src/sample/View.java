@@ -3,18 +3,33 @@ package sample;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.sql.*;
 
 public class View extends Application {
@@ -24,14 +39,12 @@ public class View extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        //loading FXML resources in root object
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        //setting title of window
         primaryStage.setTitle("Tour-Planner");
 
-        //getting reference to VBOX tours
+        // reference to VBOX tours
         VBox tours = (VBox) root.lookup("#tours");
-        //getting reference to button addTour
+        // reference to button addTour
         Button addTour = (Button) root.lookup("#addTour");
         //getting reference to TableView logs
         TableView logs = (TableView) root.lookup("#logs");
@@ -44,37 +57,37 @@ public class View extends Application {
 
 
 
-        //getting reference to Button deleteTour
+        // reference   deleteTour
         Button deleteTourBtn = (Button) root.lookup("#deleteTour");
 
 
-        //getting database connection in c object
+        // database connection
         Connection c = Controller.getConnection();
-        //creating statement from db object in order to perform DB operations
+        //creating statement
         Statement stmt = c.createStatement();
-        //running query and getting data from statement
-        ResultSet rs = stmt.executeQuery( "SELECT * FROM tourdata;" );
 
-        //Creating the mouse event handler for every tour created
+        ResultSet rs = stmt.executeQuery( "SELECT * FROM tourdata;" );
+        TextArea desc = (TextArea) root.lookup("#desc");
+
+        // mouse event handler for every tour
         EventHandler<MouseEvent> tourClicked = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
 
-                //getting reference to source button that was clicked
+                // reference  source button that was clicked
                 Button calling = (Button) e.getSource();
 
-                //getting reference to text area of description
-                TextArea desc = (TextArea) root.lookup("#desc");
 
-                //getting refeence to Label having id title
+
+                // refeence  Label having id title
                 Label title = (Label) root.lookup("#title");
 
-                //getting database connection
+                // database connection
                 Connection c = Controller.getConnection();
 
                 try {
                     Statement stmt = c.createStatement();
-                    //getting data from database for tour clicked
+                    // data from database  tour clicked
                     ResultSet rs = stmt.executeQuery( "SELECT * FROM tourdata where name = '"+calling.getText()+"';" );
                     if(rs.next()){
                         String  name = rs.getString("name");
@@ -82,9 +95,9 @@ public class View extends Application {
                         String  info = rs.getString("info");
                         float distance = rs.getFloat("distance");
 
-                        //after getting data updating the description text area
                         desc.setText(description);
-                        //also updating the title
+
+                        // title update
                         title.setText("Title: "+name);
                     }
 
@@ -93,11 +106,11 @@ public class View extends Application {
                 }
 
 
-                //a list for updating logs table
+                // liste log table
                 ObservableList<Model> data = FXCollections.observableArrayList();
 
 
-                //getting references to all columns of table
+                // references  auf alle Tabellenspalten
                 TableColumn date_col = (TableColumn)logs.getColumns().get(0);
                 TableColumn duration_col = (TableColumn)logs.getColumns().get(1);
                 TableColumn distance_col = (TableColumn)logs.getColumns().get(2);
@@ -106,7 +119,7 @@ public class View extends Application {
                 distance_col.setCellValueFactory(new PropertyValueFactory<Model,String>("distance"));
 
                 try {
-                    //getting logs data from database
+                    // logs data from db
                     ResultSet rs = Controller.getData("SELECT * from logs where name = '"+calling.getText()+"';" );
 
                     while (rs.next()){
@@ -123,7 +136,7 @@ public class View extends Application {
 
 
                     }
-                    //updating the list in table
+                    //update list in table
                     logs.setItems(data);
 
 
@@ -153,25 +166,24 @@ public class View extends Application {
 
             temp.setId("Tour"+count);
 
-            //setting mouse event on every new button
+            // mouse event on alle neue buttons
             temp.setOnMouseClicked(tourClicked);
-            //adding button in vbox
+            //add button
             tours.getChildren().add(temp);
 
 
         }
 
-        //setting spacing between buttons
+        //Abstand zwischen  Tasten
         tours.setSpacing(5);
 
-        //setting padding between buttons
         tours.setPadding(new Insets(10, 10, 10, 10));
 
 
 
 
 
-        //Creating the mouse event handler, for adding new tours
+        // Hinzufügen neuer Touren
         EventHandler<MouseEvent> addTourHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
@@ -199,24 +211,22 @@ public class View extends Application {
                     throwables.printStackTrace();
                 }
 
-                //adding new tour button in tours VBOX
                 tours.getChildren().add(temp);
 
             }
         };
 
-        //Creating the mouse event handler, for deleting a tour
+        //zum Löschen einer Tour
         EventHandler<MouseEvent> deleteTourHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                //if there is tour then delete it otherwise print appropriate message using JOptionPane
                 if(count>0){
                     Button deleteTour = (Button) root.lookup("#Tour" + count--);
                     System.out.println(deleteTour.getId());
                     System.out.println(deleteTour.getText());
 
                     Connection c = Controller.getConnection();
-                    //delete entry from daabase too
+                    //// Eintrag  aus Datenbank löschen
                     try {
                         Statement stmt = c.createStatement();
                         String sql = "DELETE from tourdata where name = '" + deleteTour.getText() + "';";
@@ -243,6 +253,116 @@ public class View extends Application {
 
             }
         };
+
+
+        EventHandler<MouseEvent> routeHandler = new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent event) {
+
+                try {
+
+                    URL url = new URL("https://www.mapquestapi.com/directions/v2/route?key=OXbb6HQzyC4dqRfdDJyLAbBjtTDiFHK4&" +
+                            "from=wien&to=graz" +
+                            "&outFormat=json&ambiguities=ignore&routeType=fastest&doReverseGeocode=false&" +
+                            "enhancedNarrative=false&avoidTimedConditions=false");
+
+                    // HTTP request
+                    HttpURLConnection con = null;
+                    con = (HttpURLConnection) url.openConnection();
+                    con.setRequestMethod("GET");
+                    //antwort
+                    int status = con.getResponseCode();
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader(con.getInputStream()));
+                    String inputLine;
+                    StringBuffer content = new StringBuffer();
+                    //st in
+                    while ((inputLine = in.readLine()) != null) {
+                        content.append(inputLine);
+                    }
+                    in.close();
+
+                    // response  JSON Objekt
+                    JSONObject myResponse = new JSONObject(content.toString());
+
+                    JSONObject routeObject = myResponse.getJSONObject("route");
+
+                    System.out.println(routeObject);
+                    //boundingBox
+                    JSONObject boundingBox = routeObject.getJSONObject("boundingBox");
+                    // kriegen lr und ul parameters
+                    JSONObject lr = boundingBox.getJSONObject("lr");
+
+                    JSONObject ul = boundingBox.getJSONObject("ul");
+
+                    System.out.println(boundingBox);
+                    // lr ul
+                    String boundingBoxString = ul.getDouble("lat")+","+ul.getDouble("lng")+","+lr.getDouble("lat")+","+lr.getDouble("lng");
+
+
+                    // MapQuest API
+                    String session = routeObject.getString("sessionId");
+                    //API key
+                    String key = "OXbb6HQzyC4dqRfdDJyLAbBjtTDiFHK4";
+                    //URL
+                    url = new URL("https://www.mapquestapi.com/staticmap/v5/map?key=OXbb6HQzyC4dqRfdDJyLAbBjtTDiFHK4&size=640,480&defaultMarker=none" +
+                            "&zoom=11&rand=737758036&session="+session +
+                            "&boundingBox="+boundingBoxString);
+                    System.out.println(url);
+
+                    System.out.println("boundingBox: "+boundingBoxString);
+                    System.out.println("sessionId: "+session);
+
+                    con = (HttpURLConnection) url.openConnection();
+                    con.setRequestMethod("GET");
+                    status = con.getResponseCode();
+
+                    System.out.println(status);
+
+                    InputStream image = con.getInputStream();
+//
+                    BufferedImage img = ImageIO.read(image);
+                    //bild for map
+                    Image mapImage = SwingFXUtils.toFXImage(img, null);
+
+
+                    ImageView imageView = new ImageView(mapImage);
+                    imageView.setFitHeight(640);
+                    imageView.setFitWidth(480);
+
+                    imageView.setPreserveRatio(true);
+
+
+
+                    //gruppe und szene objekt
+                    Group root = new Group(imageView);
+
+                    Scene scene = new Scene(root, 640, 480);
+
+                    Stage stage = new Stage();
+
+                    imageView.fitWidthProperty().bind(stage.widthProperty());
+                    stage.setTitle("Route");
+
+                    //hinzu
+                    stage.setScene(scene);
+
+
+                    stage.show();
+
+
+                    con.disconnect();
+
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+
+        Button route = (Button) root.lookup("#route");
+        route.setOnMouseClicked(routeHandler);
 
 
 

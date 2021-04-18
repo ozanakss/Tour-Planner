@@ -33,12 +33,12 @@ public class Controller {
 
 
 
-        stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);
 
-        stmt.close();
-        c.close();
+            stmt.close();
+            c.close();
 
-        return true;
+            return true;
     }
 
     public static ResultSet getData(String sql) throws SQLException {
