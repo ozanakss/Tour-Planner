@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UpdateTour">
+    <children>
+        <VBox layoutY="6.0" prefHeight="393.0" prefWidth="600.0">
+            <children>
+                <HBox prefHeight="40.0" prefWidth="600.0" />
+                <HBox prefHeight="40.0" prefWidth="600.0">
+                    <children>
+                        <Label text="Enter Date">
+                            <font>
+                                <Font size="14.0" />
+                            </font></Label>
+                        <TextField id="date" fx:id="date">
+                            <font>
+                                <Font size="14.0" />
+                            </font></TextField>
+                        <Label text="Enter Duration">
+                            <font>
+                                <Font size="14.0" />
+                            </font></Label>
+                        <TextField id="duration" fx:id="duration">
+                            <font>
+                                <Font size="14.0" />
+                            </font></TextField>
+                    </children></HBox>
+                <HBox prefHeight="40.0" prefWidth="600.0">
+                    <children>
+                        <Label text="Enter Distance">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField id="distance" fx:id="distance">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                        <Label text="Enter Rating">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField id="rating" fx:id="rating">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                    </children></HBox>
+                <HBox prefHeight="40.0" prefWidth="600.0">
+                    <children>
+                        <Label text="Enter Max Speed">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField id="maxspeed" fx:id="maxspeed">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                        <Label text="Eter Min Speed">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField id="minspeed" fx:id="minspeed">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                    </children></HBox>
+                <HBox prefHeight="48.0" prefWidth="600.0">
+                    <children>
+                        <Label text="Enter Steps">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField id="steps" fx:id="steps">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                        <Label text="Enter total time">
+                            <font>
+                                <Font size="14.0" />
+                            </font></Label>
+                        <TextField id="totaltime" fx:id="total_time">
+                            <font>
+                                <Font size="14.0" />
+                            </font></TextField>
+                    </children></HBox>
+                <HBox prefHeight="40.0" prefWidth="600.0">
+                    <children>
+                        <Label text="Enter Description">
+                            <font>
+                                <Font size="14.0" />
+                            </font></Label>
+                        <TextField id="desc" fx:id="desc" />
+
+                    </children></HBox>
+                <HBox prefHeight="40.0" prefWidth="600.0" />
+                <HBox prefHeight="40.0" prefWidth="600.0">
+                    <children>
+                        <Button id="submit_btn" fx:id="submit_btn" mnemonicParsing="false" onAction="#updateLogClicked" prefHeight="25.0" prefWidth="139.0" text="Submit" />
+                    </children></HBox>
+                <HBox prefHeight="40.0" prefWidth="600.0" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

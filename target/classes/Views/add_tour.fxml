@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddTour">
+    <children>
+        <VBox layoutY="6.0" prefHeight="393.0" prefWidth="600.0">
+            <children>
+                <HBox prefHeight="40.0" prefWidth="600.0" />
+                <HBox prefHeight="40.0" prefWidth="600.0">
+                    <children>
+                        <Label text="from">
+                            <font>
+                                <Font size="14.0" />
+                            </font></Label>
+                        <TextField id="date" fx:id="from">
+                            <font>
+                                <Font size="14.0" />
+                            </font></TextField>
+                        <Label text="to">
+                            <font>
+                                <Font size="14.0" />
+                            </font></Label>
+                        <TextField id="duration" fx:id="to">
+                            <font>
+                                <Font size="14.0" />
+                            </font></TextField>
+                    </children></HBox>
+                <HBox prefHeight="40.0" prefWidth="600.0">
+                    <children>
+                        <Label text="Tour name">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField id="distance" fx:id="tourname">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                        <Label text="description">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField id="rating" fx:id="desc">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                    </children></HBox>
+                <HBox prefHeight="40.0" prefWidth="600.0">
+                    <children>
+                        <Label text="distance">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField id="maxspeed" fx:id="distance">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                        <Label text="info">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField id="minspeed" fx:id="info">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </TextField>
+                    </children></HBox>
+
+
+                <HBox prefHeight="40.0" prefWidth="600.0" />
+                <HBox prefHeight="40.0" prefWidth="600.0">
+                    <children>
+                        <Button id="submit_btn" fx:id="submit_btn" mnemonicParsing="false" onAction="#addTourtoDB" prefHeight="25.0" prefWidth="139.0" text="Submit" />
+                    </children></HBox>
+                <HBox prefHeight="40.0" prefWidth="600.0" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

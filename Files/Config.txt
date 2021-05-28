@@ -1,0 +1,4 @@
+jdbc:postgresql://localhost:5432/tour-planner
+postgres
+postgres
+OXbb6HQzyC4dqRfdDJyLAbBjtTDiFHK4

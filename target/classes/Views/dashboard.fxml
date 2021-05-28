@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="485.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar prefHeight="28.0" prefWidth="990.0" style="-fx-padding: 5 10 8 10;">
+        <menus>
+          <Menu mnemonicParsing="false" text="File" />
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Opions">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <HBox prefHeight="31.0" prefWidth="990.0" style="-fx-border-color: black;">
+         <children>
+            <TextField prefHeight="25.0" prefWidth="458.0" text="Search" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="531.0" text="Search" />
+         </children>
+      </HBox>
+      <HBox prefHeight="420.0" prefWidth="990.0">
+         <children>
+            <VBox prefHeight="262.0" prefWidth="255.0" style="-fx-border-color: black;">
+               <children>
+                  <HBox prefHeight="25.0" prefWidth="130.0" style="-fx-border-color: black;">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Tours" />
+                        <Button fx:id="addTour" mnemonicParsing="false" prefHeight="25.0" prefWidth="41.0" text="+" />
+                        <Button fx:id="deleteTour" mnemonicParsing="false" prefHeight="25.0" prefWidth="28.0" text="-" />
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" text="[]" />
+                     </children>
+                  </HBox>
+                  <VBox id="tours" prefHeight="233.0" prefWidth="238.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="405.0" prefWidth="742.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="428.0">
+                     <children>
+                        <HBox prefHeight="27.0" prefWidth="580.0" style="-fx-padding: 5 0 0 20; -fx-border-color: black;">
+                           <children>
+                              <Label fx:id="title" text="Title:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <HBox prefHeight="29.0" prefWidth="307.0" style="-fx-border-color: black;">
+                           <children>
+                              <Button fx:id="route" mnemonicParsing="false" prefHeight="25.0" prefWidth="204.0" text="Route" />
+                              <Button fx:id="report" mnemonicParsing="false" prefHeight="25.0" prefWidth="223.0" text="Report" />
+                              <Button fx:id="summary" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Summary" />
+                              <Button fx:id="discBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="241.0" text="Description" />
+                           </children></HBox>
+                        <HBox prefHeight="80.0" prefWidth="270.0" style="-fx-border-color: black;">
+                           <children>
+                              <TextArea fx:id="desc" editable="false" prefHeight="78.0" prefWidth="747.0" />
+                           </children></HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="218.0" prefWidth="739.0">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="307.0" style="-fx-border-color: black;">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Logs:" />
+                              <Button id="addtour_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="49.0" text="+" />
+                              <Button id="deleteLog" mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0" text="-" />
+                              <Button fx:id="editTable" mnemonicParsing="false" prefHeight="25.0" prefWidth="476.0" text="Edit" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="195.0" prefWidth="739.0" style="-fx-border-color: black;">
+                           <children>
+                              <TableView id="logs" fx:id="logs" editable="true" prefHeight="157.0" prefWidth="737.0">
+                                <columns>
+                                     <TableColumn fx:id="col_date" prefWidth="75.0" text="Date" />
+                                    <TableColumn fx:id="col_duration" prefWidth="75.0" text="Duration" />
+                                    <TableColumn fx:id="col_distance" prefWidth="75.0" text="Distance" />
+                                    <TableColumn fx:id="col_name" prefWidth="75.0" text="Name" />
+                                    <TableColumn fx:id="col_description" prefWidth="75.0" text="Description" />
+                                    <TableColumn fx:id="col_total_time" prefWidth="75.0" text="Total Time" />
+                                    <TableColumn fx:id="col_rating" prefWidth="75.0" text="Rating" />
+                                    <TableColumn fx:id="col_max_speed" prefWidth="75.0" text="max speed" />
+                                    <TableColumn fx:id="col_min_speed" prefWidth="75.0" text="min speed" />
+                                    <TableColumn fx:id="col_steps" prefWidth="75.0" text="steps" />
+
+
+                                </columns>
+                              </TableView>
+                           </children>
+                        </HBox>
+                     </children></VBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
